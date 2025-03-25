@@ -44,12 +44,12 @@ def clic_click(ref_name, click_element, element_id):
     key = driver.find_elements(By.CLASS_NAME,'mpk_table_list')
     href = driver.find_elements(By.CSS_SELECTOR, 'a.mktu-category__class-link.blue-link')
     length = len(href)
-    print('length: '+ str(length))
+    # print('length: '+ str(length))
     if key :
-        result_list = create_list_of_lists(key, id)
+        result_list = create_list_of_lists(key, element_id)
         insert_second_list_in_db(result_list, t_name, ref_name)
         for j in range(length):
-            print('j: ' + str(j))
+            # print('j: ' + str(j))
             href = driver.find_elements(By.CSS_SELECTOR, 'a.mktu-category__class-link.blue-link')
 
             clic_click(href[j].text ,href[j], j + 1, )

@@ -24,7 +24,7 @@ def insert_first_list_in_db(insert_data):
         table_name = 'main'
         # Создание таблицы
         create_table_query = f'''
-              CREATE TABLE IF NOT EXISTS {table_name} (
+              CREATE TABLE IF NOT EXISTS "{table_name}" (
                   id SERIAL PRIMARY KEY,
                   key VARCHAR(100),
                   value TEXT
@@ -36,7 +36,7 @@ def insert_first_list_in_db(insert_data):
 
         # Формирование SQL-запроса для вставки нескольких строк
         insert_data_query = f'''
-         INSERT INTO {table_name} (key, value) VALUES %s;
+         INSERT INTO "{table_name}" (key, value) VALUES %s;
          '''
 
         # Используем psycopg2.extras для вставки нескольких строк
@@ -71,19 +71,19 @@ def insert_second_list_in_db(insert_data, table_name, reference_name):
         cursor = connection.cursor()
         # Создание таблицы
         create_table_query = f'''
-              CREATE TABLE IF NOT EXISTS {table_name} (
+              CREATE TABLE IF NOT EXISTS "{table_name}" (
                   id SERIAL PRIMARY KEY,
                   key VARCHAR(100),
-                  value TEXT
-                  key_id INT REFERENCES {reference_name}(id)
+                  value TEXT,
+                  key_id INT REFERENCES "{reference_name}"(id)
               );
               '''
         cursor.execute(create_table_query)
         print(f"Таблица {table_name} создана или уже существует.")
-
+        # print(insert_data)
         # Формирование SQL-запроса для вставки нескольких строк
         insert_data_query = f'''
-         INSERT INTO {table_name} (key, value, key_id) VALUES %s;
+         INSERT INTO "{table_name}" (key, value, key_id) VALUES %s;
          '''
 
         # Используем psycopg2.extras для вставки нескольких строк

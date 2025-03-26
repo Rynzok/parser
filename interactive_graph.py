@@ -31,12 +31,10 @@ for table_name, table in metadata.tables.items():
             # Выполнение запроса к родительской таблице
             parent_row = session.query(fk.column.table).filter(getattr(fk.column.table.c, parent_column_name) == child_key_value).first()
             if parent_row is not None:
-                # print(f"Таблица: {table_name}, Родительская таблица: {parent_table_name}, Значение: {parent_row}")
                 node_values[table_name] = parent_row.value  # Сохраняем значение узла
                 G.add_node(table_name)
             else:
                 pass
-                # print(f"Нет соответствующей записи в родительской таблице: {parent_table_name}.")
         else:
             G.add_node(table_name)
 

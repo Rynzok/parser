@@ -7,6 +7,7 @@ host = "localhost"  # или IP-адрес вашего сервера
 database = "parser"
 user = "user"
 password = "user"
+port = 5556
 
 
 def insert_first_list_in_db(insert_data):
@@ -16,7 +17,8 @@ def insert_first_list_in_db(insert_data):
             host=host,
             database=database,
             user=user,
-            password=password
+            password=password,
+            port = port
         )
 
         # Создание курсора для выполнения операций с базой данных
@@ -64,7 +66,8 @@ def insert_second_list_in_db(insert_data, table_name, reference_name):
             host=host,
             database=database,
             user=user,
-            password=password
+            password=password,
+            port = port
         )
 
         # Создание курсора для выполнения операций с базой данных

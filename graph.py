@@ -1,5 +1,5 @@
 import sqlalchemy
-from sqlalchemy import create_engine, MetaData
+from sqlalchemy import create_engine, MetaData, select
 from sqlalchemy.schema import Table
 from graphviz import Digraph
 
@@ -14,13 +14,15 @@ metadata.reflect(bind=engine)
 # Создание графа
 dot = Digraph()
 
+dot.attr(rankdir='TB')
+
 # Добавление таблиц в граф
 for table_name, table in metadata.tables.items():
     dot.node(table_name, table_name)
 
     # Добавление связей (внешних ключей)
     for fk in table.foreign_keys:
-        dot.edge(table_name, fk.column.table.name)
+        dot.edge(fk.column.table.name, table_name)
 
 # Сохранение графа в файл
 dot.render('database_structure', format='svg', cleanup=True)
